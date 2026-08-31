@@ -1,0 +1,11 @@
+# Exercise 1: Hello Pod - Screenshots Catalog
+#
+# 01-install-minikube.png         (winget install Kubernetes.minikube)
+# 02-minikube-start.png            (minikube version & minikube start --driver=docker)
+# 03-create-pod.png                (kubectl run hello-k8s --image=nginx --port=80)
+# 04-pod-running.png               (kubectl get pods showing Running state)
+# 05-expose-service.png            (kubectl expose pod & kubectl get services)
+# 06-minikube-service-tunnel.png   (minikube service hello-k8s tunnel output)
+# 07-nginx-browser.png             (Browser displaying "Welcome to nginx!")
+# 08-docker-desktop.png            (Docker Desktop with Engine running & minikube container)
+# 09-minikube-stop.png             (minikube stop command output)
