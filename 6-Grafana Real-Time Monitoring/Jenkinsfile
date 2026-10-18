@@ -1,0 +1,45 @@
+
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_HOST = 'tcp://docker:2375'
+        IMAGE_NAME = 'delivery-metrics'
+        CONTAINER_NAME = 'delivery_metrics'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo 'Project files are available in the Jenkins workspace.'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t ${IMAGE_NAME}:${BUILD_NUMBER} .'
+            }
+        }
+
+        stage('Test Docker Image') {
+            steps {
+                sh 'docker run --rm ${IMAGE_NAME}:${BUILD_NUMBER} python -c "import prometheus_client; print(\'Prometheus client installed successfully\')"'
+            }
+        }
+
+        stage('Complete') {
+            steps {
+                echo 'Docker image built and tested successfully.'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Check the console output.'
+        }
+    }
+}
